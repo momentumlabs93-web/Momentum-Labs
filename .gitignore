@@ -1,23 +1,2021 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
-.vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-files
-*.bclicense
-*.flf
-#Test results file
-TestResults.xml
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MomentumLabs - AI-Powered Digital Growth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --secondary: #7c3aed;
+            --accent: #f023ff;
+            --dark-bg: #0a0e27;
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --border: rgba(0, 212, 255, 0.1);
+            --text-primary: #e4e6eb;
+            --text-secondary: #a0a9b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f1729 50%, #1a0a2e 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 16px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Landing Page */
+        #landing {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 50px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-tagline {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 8px 20px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 900px;
+            height: 500px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .cta-button {
+            padding: 16px 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Section Layout */
+        .section {
+            padding: 120px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Contact Page */
+        #contact {
+            background: transparent;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .contact-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 2;
+        }
+
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        /* Packages Page */
+        #packages {
+            background: transparent;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 120px;
+        }
+
+        .package-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            transition: all 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.15);
+        }
+
+        .package-card:hover::before {
+            top: -30%;
+            right: -30%;
+        }
+
+        .package-heading {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-price {
+            font-size: 40px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-button {
+            padding: 12px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--dark-bg);
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        /* Higgsfield AI Section */
+        .higgsfield-section {
+            margin-top: 80px;
+        }
+
+        .higgsfield-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            margin-bottom: 100px;
+            background: var(--card-bg);
+            padding: 60px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .showcase-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .showcase-image svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .showcase-content h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .showcase-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .feature-item::before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .higgsfield-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 80px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .feature-heading {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Chat Section */
+        .ai-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 60px;
+            backdrop-filter: blur(10px);
+            margin-top: 80px;
+        }
+
+        .ai-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .ai-title {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ai-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .chat-interface {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        @media (max-width: 1024px) {
+            .chat-interface {
+                grid-template-columns: 1fr;
+            }
+            .higgsfield-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chat-box {
+            background: rgba(10, 20, 40, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.6;
+            backdrop-filter: blur(10px);
+        }
+
+        .message.bot {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(124, 58, 237, 0.2));
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: var(--primary);
+            align-self: flex-end;
+            font-weight: 600;
+        }
+
+        .chat-input-area {
+            padding: 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            background: rgba(10, 20, 40, 0.8);
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(30, 50, 80, 0.8);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 8px;
+            outline: none;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .chat-send {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+            border: none;
+            padding: 10px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send:hover {
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .calendar-wrapper {
+            background: rgba(10, 20, 40, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .calendar-nav button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 20px;
+            padding: 4px 8px;
+            transition: color 0.3s ease;
+        }
+
+        .calendar-nav button:hover {
+            color: var(--accent);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-bottom: 24px;
+        }
+
+        .day-name {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-secondary);
+            padding-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .day-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(30, 50, 80, 0.8);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .day-cell:hover:not(.disabled) {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .day-cell.selected {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+            border-color: var(--primary);
+            font-weight: 700;
+        }
+
+        .day-cell.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .booking-form {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .booking-form.active {
+            display: flex;
+        }
+
+        .form-label {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            background: rgba(30, 50, 80, 0.8);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 12px;
+            border-radius: 8px;
+            outline: none;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        .book-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+            border: none;
+            padding: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Follow Banner */
+        .follow-banner {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 14px 24px;
+            border-radius: 12px;
+            z-index: 999;
+            animation: float 3s ease-in-out infinite;
+            font-weight: 700;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .follow-banner a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .follow-banner a:hover {
+            color: var(--accent);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+            50% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.6); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+            opacity: 0.5;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            opacity: 1;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 14, 39, 0.9);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(26, 10, 46, 0.95) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            backdrop-filter: blur(20px);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        .modal-header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        .modal-title {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(30, 50, 80, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            outline: none;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300d4ff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .radio-option label {
+            margin: 0;
+            text-transform: none;
+            letter-spacing: 0;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+        }
+
+        .modal-button {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button.primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+        }
+
+        .modal-button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .modal-button.secondary {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .modal-button.secondary:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .qualification-status {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .qualification-status.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+
+        .qualification-status.review {
+            display: block;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Explore Section */
+        .explore-section {
+            padding: 120px 50px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, rgba(124, 58, 237, 0.03) 100%);
+        }
+
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .product-showcase {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .product-showcase:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ai-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-info {
+            padding: 32px;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .product-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .product-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+        }
+
+        .product-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .product-btn.secondary {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .product-btn.secondary:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .videos-showcase {
+            margin-top: 100px;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.15);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .play-button {
+            background: rgba(0, 212, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .play-button::after {
+            content: '▶';
+            color: var(--primary);
+            font-size: 20px;
+            margin-left: 4px;
+        }
+
+        .video-info {
+            padding: 24px;
+        }
+
+        .video-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .video-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .explore-section {
+                padding: 60px 20px;
+            }
+
+            .explore-grid {
+                gap: 24px;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-text">» MOMENTUM</div>
+        <ul class="nav-links">
+            <li><a onclick="showPage('landing')" class="active" id="nav-landing">Home</a></li>
+            <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+            <li><a onclick="showPage('packages')" id="nav-packages">Services</a></li>
+        </ul>
+    </nav>
+
+    <!-- Landing Page -->
+    <div id="landing" class="page active">
+        <div class="hero-content">
+            <div class="hero-tagline">🚀 Next Generation Marketing</div>
+            <h1 class="hero-title">Transform Your Business Into A Growth Machine</h1>
+            <p class="hero-subtitle">AI-powered digital marketing, futuristic web design, and intelligent growth strategies. Built for the future of business.</p>
+        </div>
+        <div class="hero-image">
+            <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="heroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.1" />
+                        <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1" />
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Grid background -->
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,212,255,0.05)" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="800" height="400" fill="url(#grid)" />
+                
+                <!-- Glowing circles -->
+                <circle cx="200" cy="150" r="80" fill="url(#heroGrad1)" filter="url(#glow)" opacity="0.6"/>
+                <circle cx="600" cy="280" r="100" fill="url(#heroGrad1)" filter="url(#glow)" opacity="0.4"/>
+                
+                <!-- Analytics visualization -->
+                <g opacity="0.3">
+                    <rect x="100" y="100" width="600" height="250" fill="none" stroke="rgba(0,212,255,0.2)" stroke-width="2" rx="10"/>
+                    <line x1="150" y1="300" x2="150" y2="150" stroke="rgba(0,212,255,0.3)" stroke-width="2"/>
+                    <line x1="250" y1="300" x2="250" y2="100" stroke="rgba(0,212,255,0.4)" stroke-width="2"/>
+                    <line x1="350" y1="300" x2="350" y2="120" stroke="rgba(0,212,255,0.4)" stroke-width="2"/>
+                    <line x1="450" y1="300" x2="450" y2="80" stroke="rgba(0,212,255,0.5)" stroke-width="2"/>
+                    <line x1="550" y1="300" x2="550" y2="110" stroke="rgba(124,58,237,0.4)" stroke-width="2"/>
+                    <line x1="650" y1="300" x2="650" y2="140" stroke="rgba(124,58,237,0.3)" stroke-width="2"/>
+                </g>
+                
+                <text x="400" y="370" text-anchor="middle" fill="rgba(0,212,255,0.4)" font-size="12" font-family="Inter">AI-Powered Growth Analytics</text>
+            </svg>
+        </div>
+        <button class="cta-button" onclick="showPage('packages')">Explore Services</button>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's discuss how we can accelerate your business growth with cutting-edge technology and strategies.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-label">Call Us</div>
+                    <div class="contact-info">
+                        <a href="tel:0679113622">067 911 3622</a><br>
+                        <a href="tel:0682732318">068 273 2318</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-label">Email Us</div>
+                    <div class="contact-info">
+                        <a href="mailto:momentumlabs93@gmail.com">momentumlabs93@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">🚀</div>
+                    <div class="contact-label">Follow Us</div>
+                    <div class="contact-info">
+                        <a href="https://www.instagram.com/mo.mentumlabs" target="_blank">@mo.mentumlabs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Packages Page -->
+    <div id="packages" class="page">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Services & Solutions</h2>
+                <p class="section-subtitle">Comprehensive digital transformation packages powered by AI and modern technology.</p>
+            </div>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3 class="package-heading">Web Design Pro</h3>
+                    <div class="package-price">R 989</div>
+                    <p class="package-description">Futuristic, responsive websites with advanced animations, SEO optimization, and lightning-fast performance.</p>
+                    <button class="package-button">Get Started</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="featured-badge">POPULAR</div>
+                    <h3 class="package-heading">Growth Marketing</h3>
+                    <div class="package-price">6.2%</div>
+                    <p class="package-description">Performance-based marketing with data-driven strategies. We take 6.2% of revenue generated after 2-week trial.</p>
+                    <button class="package-button" onclick="openQualificationForm()">Start Trial</button>
+                </div>
+                
+                <div class="package-card">
+                    <h3 class="package-heading">Social Excellence</h3>
+                    <div class="package-price">R 1.5K/mo</div>
+                    <p class="package-description">Complete social media strategy, content creation, community management, and audience growth optimization.</p>
+                    <button class="package-button">Get Started</button>
+                </div>
+
+                <div class="package-card">
+                    <div class="featured-badge">AI POWERED</div>
+                    <h3 class="package-heading">AI Media Studio</h3>
+                    <div class="package-price">Custom</div>
+                    <p class="package-description">Generate unlimited AI images and videos using Higgsfield. Professional content creation in minutes, not days.</p>
+                    <button class="package-button">Explore</button>
+                </div>
+            </div>
+
+            <!-- Higgsfield Showcase -->
+            <div class="higgsfield-section">
+                <div class="section-header">
+                    <h2 class="section-title">Powered By Higgsfield AI</h2>
+                    <p class="section-subtitle">Create stunning visual content instantly with advanced AI generation technology.</p>
+                </div>
+
+                <div class="higgsfield-showcase">
+                    <div class="showcase-image">
+                        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="showcase1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.2" />
+                                    <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.2" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="400" fill="url(#showcase1)" rx="20"/>
+                            
+                            <!-- Film reel -->
+                            <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(0,212,255,0.3)" stroke-width="2"/>
+                            <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+                            
+                            <!-- Play button -->
+                            <polygon points="180,160 180,240 240,200" fill="rgba(0,212,255,0.5)"/>
+                            
+                            <!-- Particles -->
+                            <circle cx="100" cy="100" r="3" fill="rgba(124,58,237,0.5)"/>
+                            <circle cx="300" cy="150" r="3" fill="rgba(0,212,255,0.4)"/>
+                            <circle cx="150" cy="300" r="3" fill="rgba(124,58,237,0.4)"/>
+                            <circle cx="320" cy="300" r="3" fill="rgba(0,212,255,0.3)"/>
+                            
+                            <text x="200" y="360" text-anchor="middle" fill="rgba(0,212,255,0.3)" font-size="12" font-family="Inter">AI Video Generation</text>
+                        </svg>
+                    </div>
+                    <div class="showcase-content">
+                        <h3>AI-Powered Content Creation</h3>
+                        <p>Harness the power of Higgsfield's advanced AI to generate professional marketing images and videos. Transform your content strategy instantly.</p>
+                        <div class="showcase-features">
+                            <div class="feature-item">Generate unlimited custom images instantly</div>
+                            <div class="feature-item">Create engaging videos for any platform</div>
+                            <div class="feature-item">Maintain brand consistency automatically</div>
+                            <div class="feature-item">Scale content production 10x faster</div>
+                            <div class="feature-item">Professional quality, zero photoshoot costs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="higgsfield-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">🖼️</div>
+                        <h3 class="feature-heading">Image Generation</h3>
+                        <p class="feature-text">Create stunning marketing images, product visuals, and promotional graphics without expensive photoshoots.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎬</div>
+                        <h3 class="feature-heading">Video Creation</h3>
+                        <p class="feature-text">Generate engaging video content for social media, ads, and marketing campaigns powered by advanced AI.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-heading">Brand Consistency</h3>
+                        <p class="feature-text">Maintain cohesive branding across all generated content with customizable styles and guidelines.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-heading">Lightning Fast</h3>
+                        <p class="feature-text">Generate professional content in minutes. Scale your marketing without budget or time limitations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat & Calendar -->
+            <div class="ai-section">
+                <div class="ai-header">
+                    <h3 class="ai-title">Schedule Consultation</h3>
+                    <p class="ai-subtitle">Chat with our AI assistant or book a meeting with our team.</p>
+                </div>
+                
+                <div class="chat-interface">
+                    <div class="chat-box">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message bot">Hello! I'm your MomentumLabs AI assistant. Ask about our services, pricing, or Higgsfield AI capabilities. How can I help?</div>
+                        </div>
+                        <div class="chat-input-area">
+                            <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything...">
+                            <button class="chat-send" onclick="handleChat()">Send</button>
+                        </div>
+                    </div>
+
+                    <div class="calendar-wrapper">
+                        <div class="calendar-nav">
+                            <button onclick="changeMonth(-1)">&lt;</button>
+                            <span id="monthDisplay">May 2026</span>
+                            <button onclick="changeMonth(1)">&gt;</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid"></div>
+                        
+                        <div class="booking-form" id="bookingForm">
+                            <div class="form-label">Book for <span id="selectedDateText"></span></div>
+                            <input type="text" class="form-input" id="bookName" placeholder="Full Name" required>
+                            <input type="email" class="form-input" id="bookEmail" placeholder="Email" required>
+                            <input type="tel" class="form-input" id="bookPhone" placeholder="Phone" required>
+                            <textarea class="form-input" id="bookNotes" placeholder="Your project details..." rows="2"></textarea>
+                            <button class="book-btn" onclick="confirmBooking()">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Follow Banner -->
+    <div class="follow-banner">
+        <a href="https://www.instagram.com/mo.mentumlabs" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+            </svg>
+            Follow
+        </a>
+    </div>
+
+    <script>
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageName).classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.getElementById('nav-' + pageName).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const chatResponses = {
+            'price': 'Website: R989. Growth Marketing: 6.2% of revenue. Social Media: R1,500/month. AI Media Studio: Custom pricing. Higgsfield AI generates unlimited content!',
+            'higgsfield': 'Higgsfield AI generates stunning images and videos instantly. Perfect for marketing campaigns, social media, and product visuals. No expensive photoshoots needed!',
+            'ai': 'Our AI services use Higgsfield to create professional marketing content. Generate images, videos, and graphics in minutes at a fraction of traditional costs.',
+            'video': 'Generate engaging videos with Higgsfield AI for social media, ads, and marketing campaigns. Professional quality, lightning-fast turnaround.',
+            'image': 'Create custom marketing images instantly with Higgsfield. Product visuals, promotional graphics, brand content - all AI-generated.',
+            'web': 'Our futuristic website design includes animations, SEO, and performance optimization. Built with cutting-edge technology for the future.',
+            'hello': 'Hi! Welcome to MomentumLabs. How can I help you with AI-powered marketing, web design, or Higgsfield content generation?',
+            'hi': 'Hello! What would you like to know about our services? Web design, marketing, or AI media generation?',
+            'contact': 'Call: 067 911 3622 or 068 273 2318. Email: momentumlabs93@gmail.com. Instagram: @mo.mentumlabs',
+            'book': 'Select a date on the calendar to schedule your consultation with our team.',
+            'services': 'We offer Web Design, Growth Marketing, Social Media Management, and AI Media Generation with Higgsfield.',
+            'default': 'I can help with pricing, services, AI capabilities, or scheduling. What interests you?'
+        };
+
+        function handleChat() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim().toLowerCase();
+            if (!msg) return;
+            addMessage(msg, 'user');
+            input.value = '';
+            setTimeout(() => {
+                let reply = chatResponses['default'];
+                for (let key in chatResponses) {
+                    if (msg.includes(key)) {
+                        reply = chatResponses[key];
+                        break;
+                    }
+                }
+                addMessage(reply, 'bot');
+            }, 500);
+        }
+
+        function addMessage(text, sender) {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            div.textContent = text;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleChat();
+        });
+
+        let currentMonth = new Date(2026, 4, 17);
+        let selectedDate = null;
+
+        function renderCalendar() {
+            const year = currentMonth.getFullYear();
+            const month = currentMonth.getMonth();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById('monthDisplay').textContent = `${monthNames[month]} ${year}`;
+
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            ['S','M','T','W','T','F','S'].forEach(d => {
+                const el = document.createElement('div');
+                el.className = 'day-name';
+                el.textContent = d;
+                grid.appendChild(el);
+            });
+
+            for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'day-cell';
+                cell.textContent = day;
+                const dateObj = new Date(year, month, day);
+                if (dateObj < new Date().setHours(0,0,0,0)) {
+                    cell.classList.add('disabled');
+                } else {
+                    cell.onclick = () => selectDate(day, cell);
+                }
+                if (selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === month) {
+                    cell.classList.add('selected');
+                }
+                grid.appendChild(cell);
+            }
+        }
+
+        function changeMonth(dir) {
+            currentMonth.setMonth(currentMonth.getMonth() + dir);
+            renderCalendar();
+        }
+
+        function selectDate(day, cell) {
+            document.querySelectorAll('.day-cell.selected').forEach(c => c.classList.remove('selected'));
+            cell.classList.add('selected');
+            selectedDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+            document.getElementById('selectedDateText').textContent = selectedDate.toLocaleDateString();
+            document.getElementById('bookingForm').classList.add('active');
+        }
+
+        function confirmBooking() {
+            if (!selectedDate) return;
+            const name = document.getElementById('bookName').value;
+            const email = document.getElementById('bookEmail').value;
+            const phone = document.getElementById('bookPhone').value;
+            if(!name || !email || !phone) {
+                alert("Please fill all fields.");
+                return;
+            }
+            const dateStr = selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            alert(`Consultation confirmed for ${dateStr}!\n\nConfirmation sent to ${email}`);
+            addMessage(`Perfect! Your consultation is booked for ${dateStr}. Confirmation email sent!`, 'bot');
+            document.getElementById('bookingForm').classList.remove('active');
+            document.querySelectorAll('.day-cell.selected').forEach(c => c.classList.remove('selected'));
+            document.getElementById('bookName').value = '';
+            document.getElementById('bookEmail').value = '';
+            document.getElementById('bookPhone').value = '';
+            selectedDate = null;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCalendar);
+    </script>
+
+    <!-- Qualification Form Modal -->
+    <div id="qualificationModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeQualificationForm()">✕</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Growth Marketing Qualification</h2>
+                <p class="modal-subtitle">Quick assessment to ensure we're a perfect fit for your business</p>
+            </div>
+            
+            <form id="qualificationForm" onsubmit="submitQualificationForm(event)">
+                <div class="form-group">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactEmail">Email Address</label>
+                    <input type="email" id="contactEmail" name="contactEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactPhone">Phone Number</label>
+                    <input type="tel" id="contactPhone" name="contactPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Annual Revenue</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="revenue1" name="annualRevenue" value="under50k" required>
+                            <label for="revenue1">Under R50K</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="revenue2" name="annualRevenue" value="50k-250k">
+                            <label for="revenue2">R50K - R250K</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="revenue3" name="annualRevenue" value="250k-1m">
+                            <label for="revenue3">R250K - R1M</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="revenue4" name="annualRevenue" value="over1m">
+                            <label for="revenue4">Over R1M</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyBudget">Current Monthly Marketing Budget</label>
+                    <select id="monthlyBudget" name="monthlyBudget" required>
+                        <option value="">Select a range...</option>
+                        <option value="no-budget">No dedicated budget yet</option>
+                        <option value="1k-5k">R1K - R5K</option>
+                        <option value="5k-10k">R5K - R10K</option>
+                        <option value="10k-25k">R10K - R25K</option>
+                        <option value="25k-plus">R25K+</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mainGoal">Primary Business Goal</label>
+                    <select id="mainGoal" name="mainGoal" required>
+                        <option value="">Select your main goal...</option>
+                        <option value="lead-generation">Lead Generation</option>
+                        <option value="sales">Direct Sales/Revenue</option>
+                        <option value="brand-awareness">Brand Awareness</option>
+                        <option value="website-traffic">Website Traffic</option>
+                        <option value="customer-retention">Customer Retention</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you currently have a website?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="website1" name="hasWebsite" value="yes" required>
+                            <label for="website1">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="website2" name="hasWebsite" value="no">
+                            <label for="website2">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="currentMarketing">Current Marketing Channels (if any)</label>
+                    <textarea id="currentMarketing" name="currentMarketing" placeholder="E.g., Social media, Google Ads, Email, etc. Or 'None' if just starting..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="expectations">What results are you expecting in the first 2 weeks?</label>
+                    <textarea id="expectations" name="expectations" placeholder="Be specific about your goals and expectations..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalInfo">Any additional information you'd like us to know?</label>
+                    <textarea id="additionalInfo" name="additionalInfo" placeholder="Tell us more about your business, industry, target audience, etc."></textarea>
+                </div>
+
+                <div class="qualification-status" id="qualificationStatus"></div>
+
+                <div class="modal-actions">
+                    <button type="button" class="modal-button secondary" onclick="closeQualificationForm()">Cancel</button>
+                    <button type="submit" class="modal-button primary">Submit & Qualify</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openQualificationForm() {
+            document.getElementById('qualificationModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQualificationForm() {
+            document.getElementById('qualificationModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('qualificationForm').reset();
+            document.getElementById('qualificationStatus').classList.remove('success', 'review');
+        }
+
+        function submitQualificationForm(event) {
+            event.preventDefault();
+
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                annualRevenue: document.querySelector('input[name="annualRevenue"]:checked').value,
+                monthlyBudget: document.getElementById('monthlyBudget').value,
+                mainGoal: document.getElementById('mainGoal').value,
+                hasWebsite: document.querySelector('input[name="hasWebsite"]:checked').value,
+                currentMarketing: document.getElementById('currentMarketing').value,
+                expectations: document.getElementById('expectations').value,
+                additionalInfo: document.getElementById('additionalInfo').value
+            };
+
+            // Qualification scoring
+            let qualificationScore = 0;
+            let reasons = [];
+
+            // Revenue scoring
+            if (formData.annualRevenue === '250k-1m' || formData.annualRevenue === 'over1m') {
+                qualificationScore += 25;
+                reasons.push('Strong revenue potential');
+            } else if (formData.annualRevenue === '50k-250k') {
+                qualificationScore += 15;
+            } else if (formData.annualRevenue === 'under50k') {
+                reasons.push('Early-stage business');
+            }
+
+            // Budget scoring
+            if (formData.monthlyBudget === '10k-25k' || formData.monthlyBudget === '25k-plus') {
+                qualificationScore += 25;
+                reasons.push('Sufficient marketing budget');
+            } else if (formData.monthlyBudget === '5k-10k') {
+                qualificationScore += 15;
+            } else if (formData.monthlyBudget === '1k-5k') {
+                qualificationScore += 10;
+            } else {
+                reasons.push('Limited marketing budget - may need budget increase');
+            }
+
+            // Goal alignment
+            if (formData.mainGoal === 'sales' || formData.mainGoal === 'lead-generation') {
+                qualificationScore += 25;
+                reasons.push('Clear ROI-focused goal');
+            } else if (formData.mainGoal === 'website-traffic') {
+                qualificationScore += 15;
+            }
+
+            // Website presence
+            if (formData.hasWebsite === 'yes') {
+                qualificationScore += 15;
+                reasons.push('Already has website/online presence');
+            } else {
+                reasons.push('Will need website setup first');
+            }
+
+            // Current marketing
+            if (formData.currentMarketing && formData.currentMarketing.toLowerCase() !== 'none') {
+                qualificationScore += 10;
+                reasons.push('Some existing marketing foundation');
+            }
+
+            // Display result
+            const statusDiv = document.getElementById('qualificationStatus');
+            let statusText = '';
+
+            if (qualificationScore >= 70) {
+                statusDiv.classList.add('success');
+                statusDiv.classList.remove('review');
+                statusText = `✓ HIGHLY QUALIFIED! Score: ${qualificationScore}/100<br>
+                Your business is an excellent fit for our Growth Marketing service. Our team will contact you within 24 hours to start your 2-week trial.`;
+            } else if (qualificationScore >= 50) {
+                statusDiv.classList.add('review');
+                statusDiv.classList.remove('success');
+                statusText = `→ UNDER REVIEW - Score: ${qualificationScore}/100<br>
+                Your profile shows potential. Our team will review and contact you shortly to discuss the best approach for your situation.`;
+            } else {
+                statusDiv.classList.add('review');
+                statusDiv.classList.remove('success');
+                statusText = `→ CONSULTATION RECOMMENDED - Score: ${qualificationScore}/100<br>
+                Let's schedule a consultation to discuss your goals. Our team can recommend the best solution for your current stage.`;
+            }
+
+            statusDiv.innerHTML = statusText;
+            statusDiv.style.display = 'block';
+
+            // Log the qualification
+            console.log('Qualification Submitted:', {
+                ...formData,
+                qualificationScore: qualificationScore,
+                qualificationReasons: reasons,
+                timestamp: new Date().toISOString()
+            });
+
+            // Disable submit button temporarily and show success message
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitted ✓';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // Send notification (in real scenario, this would be an API call)
+                addMessage(`Great! I've received your qualification application for the Growth Marketing trial. Our team will review your profile and contact you within 24 hours at ${formData.contactEmail}. Keep an eye on your inbox!`, 'bot');
+                closeQualificationForm();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('qualificationModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeQualificationForm();
+            }
+        });
+    </script>
+</body>
+</html>
